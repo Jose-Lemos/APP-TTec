@@ -6,9 +6,9 @@ import { Fontisto } from '@expo/vector-icons';
 const Cuadrado = (prop) => {
     return (
         <View style={styles.cuadrado1}>
-            {/*<Fontisto name="fire" size={28} color="#0070F0" />*/}
-            <Text style={styles.statisticsActivity}>3.950</Text>
-            <Text style={styles.descriptionStatistics}>carl Burnt</Text>
+            <Text><Fontisto name={prop.icon} size={28} color={prop.color} /></Text>
+            <Text style={styles.statisticsActivity}>{prop.num}</Text>
+            <Text style={styles.descriptionStatistics}>{prop.descriptionNum}</Text>
         </View>
     );
 };
