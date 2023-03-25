@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View } from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 
 
 const Cuadrado = (prop) => {
     return (
         <View style={styles.cuadrado1}>
-            <Text><Fontisto name={prop.icon} size={28} color={prop.color} /></Text>
+            <Text><MaterialIcons name={prop.icon} size={24} color={prop.color} /></Text>
             <Text style={styles.statisticsActivity}>{prop.num}</Text>
             <Text style={styles.descriptionStatistics}>{prop.descriptionNum}</Text>
         </View>

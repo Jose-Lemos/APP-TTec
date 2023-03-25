@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Cuadrado from './src/Componentes/Cuadrado';  // debe ser de la misma forma que el export
@@ -14,9 +13,9 @@ export default function App() {
       <Text style={styles.overview}>Resumen</Text>
 
       <View style = {styles.rectangulo1}>
-        <Cuadrado icon="fire" num="3.951" descriptionNum="carl Burnt" color="#0070F0"></Cuadrado>
-        <Cuadrado icon="fire" num="3.951" descriptionNum="carl Burnt" color="#0070F0"></Cuadrado>
-        <Cuadrado icon="fire" num="3.951" descriptionNum="carl Burnt" color="#0070F0"></Cuadrado>
+        <Cuadrado icon="chat" num="3.951" descriptionNum="Rtas gen" color="#0070F0"></Cuadrado>
+        <Cuadrado icon="image" num="1.000" descriptionNum="Img gen" color="#0070F0"></Cuadrado>
+        <Cuadrado icon="mic" num="15" descriptionNum="Trad. real" color="#0070F0"></Cuadrado>
         {/*<View style={styles.cuadrado1}>
           <Text><MaterialIcons name="alarm" size={28} color="#0070F0" /></Text>
           <Text style={styles.statisticsActivity}>3hs 14min</Text>
@@ -68,15 +67,19 @@ export default function App() {
       </View>
 
       <View style={styles.containerNavVar}>
-
+        <View style = {styles.btnHomeContainer}>
+          <MaterialIcons name="home" size={30} color="#FFFFFF" />
+          <Text style={[{color: "#FFFFFF"}]}>INICIO</Text>
+        </View>
+        <MaterialIcons name="chat" size={24} color="#72777A" />
+        <MaterialIcons name="image" size={24} color="#72777A" />
+        <MaterialIcons name="mic" size={24} color="#72777A" />
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  
-
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -107,102 +110,40 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  cuadrado1:{
-    width: 118,
-    height: 118,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 24,
-    borderColor: "cyan",
-    padding: 18,
-    justifyContent: "space-around",
-
-    
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 15,
-    },
-    shadowOpacity:  0.24,
-    shadowRadius: 16.41,
-    elevation: 20
-  },
-
-  statisticsActivity:{
-    fontSize: 14,
-    lineHeight: 20,
-    color: "#303437",
-    fontWeight: "bold",
-  },
-
-  descriptionStatistics:{
-    fontSize: 12,
-    lineHeight: 16,
-    color: "#72777A",
-  },
-
-
-  rectanguloLargo:{
-    width: 390,
-    height: 140,
-    borderRadius: 24,
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-
   containerRectangulos:{
     justifyContent: "space-around",
     flex: 1,
   },
 
-  descriptionContainerActivities:{
-    justifyContent: "space-around",
-    height: 55,
-  },
-
-  activityText:{
-    fontSize: 18,
-    lineHeight: 24,
-    color: "#202325",
-    fontWeight:"bold",
-  },
-
-  timeActivityText:{
-    fontSize: 14,
-    lineHeight: 14,
-    color: "#404446",
-  },
-
-  optionContainerActivity:{
-    backgroundColor: "#FFFFFF",
-    width: 100,
-    height: 30,
-    borderRadius: 48,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  optionActivity1Text:{
-    fontSize: 14,
-    lineHeight: 16,
-    color: "#A05E03",
-    fontWeight:"bold",
-    justifyContent: "center",
-  },
-
-  optionActivity2Text:{
-    fontSize: 14,
-    lineHeight: 16,
-    color: "#5555CB",
-    fontWeight:"bold",
-    justifyContent: "center",
-  },
+  
 
   containerNavVar:{
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
     width: 390,
     height: 80,
-    backgroundColor: "gray",
+    backgroundColor: "#FFFFFF",
     marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: 24,
+
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 15,
+        },
+        shadowOpacity:  0.24,
+        shadowRadius: 16.41,
+        elevation: 20
+  },
+
+  btnHomeContainer:{
+    backgroundColor: "#303437",
+    borderRadius: 48,
+    width: 110,
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
 });
