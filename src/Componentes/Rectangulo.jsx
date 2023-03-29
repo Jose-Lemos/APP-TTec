@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View, Pressable} from 'react-native';
 
 const Rectangulo = (prop) => {
     return (
@@ -7,9 +7,12 @@ const Rectangulo = (prop) => {
             <Text style={styles.activityText}>{prop.titleText}</Text>
             <Text style={styles.timeActivityText}>{prop.descText}</Text>
           </View>
-          <View style={styles.optionContainerActivity}>
-            <Text style={[styles.optionActivity1Text,{color: prop.txtColor}]}>{prop.btnText}</Text>
-          </View>
+          
+            <View style={styles.optionContainerActivity}>
+                <Text style={[styles.optionActivity1Text,{color: prop.txtColor}]}>{prop.btnText}</Text>
+            </View>
+
+          
         </View>
     );
 
@@ -23,6 +26,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         alignItems: "center",
         flexDirection: "row",
+        marginTop: 10,
+        marginBottom: 10,
     },
     
     containerRectangulos:{
