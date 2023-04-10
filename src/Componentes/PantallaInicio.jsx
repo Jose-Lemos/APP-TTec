@@ -1,5 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 import {ROUTES} from './routes';
 
 
@@ -8,7 +9,13 @@ import Rectangulo from './Rectangulo';
 
 
 
-const PantallaInicio =  ({navigation}) => {
+const PantallaInicio =  () => {
+  const navigation = useNavigation();
+
+  const _handlePress = () => {
+    navigation.navigate(ROUTES.CHAT);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.home}>Inicio</Text>
@@ -73,9 +80,7 @@ const PantallaInicio =  ({navigation}) => {
           <MaterialIcons name="home" size={30} color="#FFFFFF" />
           <Text style={[{color: "#FFFFFF"}]}>INICIO</Text>
         </View>
-        <Pressable onPressIn = {()=>{
-            navigation.navigate(ROUTES.CHAT)
-        }}>
+        <Pressable onPressIn = {_handlePress}>
             <MaterialIcons name="chat" size={24} color="#72777A" />
         </Pressable>
         
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
   },
 
   btnHomeContainer:{
-    backgroundColor: "#303437",
+    backgroundColor: "#72777A",
     borderRadius: 48,
     width: 110,
     height: 50,
