@@ -1,11 +1,11 @@
 import { SafeAreaView, StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import {ROUTES} from './routes';
+import {ROUTES} from '../routes/routes';
 
 
-import Cuadrado from './Cuadrado';  // debe ser de la misma forma que el export
-import Rectangulo from './Rectangulo';
+import Cuadrado from '../components/Cuadrado';  // debe ser de la misma forma que el export
+import Rectangulo from '../components/Rectangulo';
 
 
 
@@ -17,7 +17,7 @@ const PantallaInicio =  () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.home}>Inicio</Text>
       <Text style={styles.overview}>Resumen</Text>
 
@@ -75,20 +75,8 @@ const PantallaInicio =  () => {
         </View>*/}
       </ScrollView>
 
-      <View style={styles.containerNavVar}>
-        <View style = {styles.btnHomeContainer}>
-          <MaterialIcons name="home" size={30} color="#FFFFFF" />
-          <Text style={[{color: "#FFFFFF"}]}>INICIO</Text>
-        </View>
-        <Pressable onPressIn = {_handlePress}>
-            <MaterialIcons name="chat" size={24} color="#72777A" />
-        </Pressable>
-        
-        
-        <MaterialIcons name="image" size={24} color="#72777A" />
-        <MaterialIcons name="mic" size={24} color="#72777A" />
-      </View>
-    </SafeAreaView>
+      
+    </View>
   );
 };
 
@@ -98,6 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 30,
     marginHorizontal: 10,
+    backgroundColor: "#FFFFFF",
   },
 
   home:{
@@ -107,6 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     color: "#303437",
+    marginLeft: 8,
   },
 
   overview:{
@@ -116,6 +106,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     color: "#404446",
     marginBottom: 10,
+    marginLeft: 8,
   },
 
   rectangulo1:{
@@ -129,36 +120,6 @@ const styles = StyleSheet.create({
   },
 
   
-
-  containerNavVar:{
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: 390,
-    height: 80,
-    backgroundColor: "#FFFFFF",
-    marginBottom: 10,
-    borderRadius: 24,
-
-    shadowColor: "#000000",
-        shadowOffset: {
-          width: 0,
-          height: 15,
-        },
-        shadowOpacity:  0.24,
-        shadowRadius: 16.41,
-        elevation: 20
-  },
-
-  btnHomeContainer:{
-    backgroundColor: "#72777A",
-    borderRadius: 48,
-    width: 110,
-    height: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
 });
 
 export default PantallaInicio;
