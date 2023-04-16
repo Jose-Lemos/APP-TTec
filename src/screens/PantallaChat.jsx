@@ -1,13 +1,23 @@
-import {StyleSheet, Text, View, TextInput } from 'react-native';
+import {
+    StyleSheet, 
+    View, 
+    TextInput, 
+    KeyboardAvoidingView, 
+} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import {ROUTES} from '../routes/routes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Pressable } from 'react-native';
+import { useState } from 'react';
 
 import HeaderBot from '../components/HeaderBot';
+import Mensaje from '../components/Mensaje';
 
 const PantallaChat = (prop) => {
+    const [texto, setTexto] = useState("");
+    const [buzon, setBuzon] = useState([]);
+
     const navigation = useNavigation();
 
     const _handlePress = () => {
@@ -19,16 +29,45 @@ const PantallaChat = (prop) => {
                 canal = "Texto"
                 activityText = "Siempre Activo"   
             />
-
-            <ScrollView style={styles.chatContent}>
-                <Text>CHAT...</Text>
-            </ScrollView>
-
-            <View style={styles.inputContainer}>
-                <TextInput style={styles.inpText}></TextInput>
-                <MaterialIcons name="send" size={24} color="black" />
-            </View>
-
+            <KeyboardAvoidingView style={{ flex: 1 }}>
+                <ScrollView style={styles.chatContent}>
+                    {buzon.map((texto)=>(
+                            <View style={styles.msgUser}>
+                                <Mensaje
+                                emisor="user"
+                                text={texto}
+                                />
+                            </View>
+                            
+                            )
+                        )
+                    }
+                </ScrollView>
+                    
+                        <View style={styles.inputContainer}>
+                            <TextInput 
+                            placeholder="Escribe un mensaje" 
+                            value={texto}  
+                            onChangeText = {setTexto}
+                            style={styles.inpText}
+                            onEndEditing={()=>{
+                                setBuzon(buzon.concat(texto));
+                                setTexto("");
+                            }}
+                            >                         
+                            </TextInput>
+                            <MaterialIcons.Button
+                                name="send" 
+                                size={24} 
+                                color="black"
+                                onPress={()=>{
+                                    setBuzon(buzon.concat(texto));
+                                    setTexto("");
+                                }}
+                            />
+                        </View>
+                
+            </KeyboardAvoidingView>
             
         </View>
     );
@@ -50,6 +89,12 @@ const styles = StyleSheet.create({
     chatContent:{
         flexDirection: "column",
         height: "79%",
+        flex:1,
+    },
+
+    msgUser:{
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
     },
 
     inputContainer:{

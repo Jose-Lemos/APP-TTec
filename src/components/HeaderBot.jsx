@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const HeaderBot = (props) => {
+const HeaderBot = ({activityText, canal}) => {
     return(
         <View style={styles.container}>
             <FontAwesome5 name="arrow-alt-circle-left" size={50} color="#72777A" />
@@ -10,12 +10,12 @@ const HeaderBot = (props) => {
             </View>
             
             <View>
-                <Text>Canal de {props.canal}</Text>
+                <Text>Canal de {canal}</Text>
                 <View style={styles.state}>
                     <View style={[styles.circleActivity, {backgroundColor: "#7DDE86"}]}>
 
                     </View>
-                    <Text style={styles.textActivity}>{ props.activityText }</Text>
+                    <Text style={styles.textActivity}>{ activityText }</Text>
                 </View>
             </View>
         </View>

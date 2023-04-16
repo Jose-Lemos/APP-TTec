@@ -1,9 +1,9 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 
-const Mensaje = (props) =>{
+const Mensaje = ({emisor, text} ) =>{
     const borderMsg = () =>{
-        if (props.trx == "user"){
+        if (emisor == "user"){
             return(
                 StyleSheet.create({
                     msgText:{
@@ -31,10 +31,29 @@ const Mensaje = (props) =>{
         }
     };
     return(
-        <View>
-            
+        <View style={styles.msgText}>
+            <Text style={styles.text}> {text} </Text>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    msgText:{
+        backgroundColor: "#0070F0",
+        borderRadius: 24,
+        borderBottomEndRadius: 0,
+        justifyContent: "center",
+        alignItems: "flex-end",
+    },
+
+    text:{
+        color:"#FFFFFF",
+        lineHeight: 24,
+        fontSize: 20,
+        justifyContent: "flex-end",
+        padding: 6,
+    },
+
+});
 
 export default Mensaje;
