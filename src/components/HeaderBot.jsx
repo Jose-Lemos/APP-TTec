@@ -4,7 +4,6 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const HeaderBot = ({activityText, canal}) => {
     return(
         <View style={styles.container}>
-            <FontAwesome5 name="arrow-alt-circle-left" size={50} color="#72777A" />
             <View style={styles.containRobot}>
                 <FontAwesome5 name="robot" size={30} color="#0070F0" />
             </View>
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         gap: 30,
         alignItems: "center",
+        justifyContent: "center",
         margin: 20,
     }, 
 

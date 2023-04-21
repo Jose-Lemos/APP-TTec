@@ -3,20 +3,51 @@ import {
     View, 
     TextInput, 
     KeyboardAvoidingView, 
+    Button,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import {ROUTES} from '../routes/routes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Pressable } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useIsFocused } from "@react-navigation/native";
 
 import HeaderBot from '../components/HeaderBot';
-import Mensaje from '../components/Mensaje';
+import MensajeUser from '../components/MensajeUser';
+import MensajeIA from '../components/MansajeIA';
 
 const PantallaChat = (prop) => {
     const [texto, setTexto] = useState("");
     const [buzon, setBuzon] = useState([]);
+    const isFocused = useIsFocused();
+
+    const fetchApi = async (message) => {
+        try {
+          const response = await fetch(
+            `https://tnt2023.panaltesting.com.ar/chat?question=${message}`
+          );
+          const data = await response.json();
+          setBuzon((messagesUpdated) =>
+            messagesUpdated.concat({ message: data.mensaje, isUser: false })
+          );
+        } catch (error) {
+          console.log("ERROR", error);
+        }
+      };
+    
+      useEffect(() => {
+        if (isFocused) {
+        }
+      }, [isFocused]);
+
+      const _addUserMessage = () => {
+        if (texto !== "") {
+          setBuzon(buzon.concat({ message: texto, isUser: true }));
+          fetchApi(texto);
+          setTexto("");
+        }
+      };
 
     const navigation = useNavigation();
 
@@ -31,15 +62,24 @@ const PantallaChat = (prop) => {
             />
             <KeyboardAvoidingView style={{ flex: 1 }}>
                 <ScrollView style={styles.chatContent}>
-                    {buzon.map((texto)=>(
-                            <View style={styles.msgUser}>
-                                <Mensaje
-                                emisor="user"
-                                text={texto}
+                    {buzon.map((texto, index)=> texto.isUser? (
+                            <View
+                             key={`msg-${index}`}
+                             style={styles.msgUser}>
+                                <MensajeUser
+                                text={texto.message}
                                 />
                             </View>
                             
-                            )
+                            ) : (
+                                    <View
+                                    key={`msg-${index}`}
+                                    style={styles.msgIA}>
+                                        <MensajeIA
+                                        text={texto.message}
+                                        />
+                                    </View>
+                                )
                         )
                     }
                 </ScrollView>
@@ -50,20 +90,14 @@ const PantallaChat = (prop) => {
                             value={texto}  
                             onChangeText = {setTexto}
                             style={styles.inpText}
-                            onEndEditing={()=>{
-                                setBuzon(buzon.concat(texto));
-                                setTexto("");
-                            }}
+                            onSubmitEditing={_addUserMessage}
                             >                         
                             </TextInput>
                             <MaterialIcons.Button
                                 name="send" 
                                 size={24} 
                                 color="black"
-                                onPress={()=>{
-                                    setBuzon(buzon.concat(texto));
-                                    setTexto("");
-                                }}
+                                onPress={_addUserMessage}
                             />
                         </View>
                 
@@ -95,6 +129,15 @@ const styles = StyleSheet.create({
     msgUser:{
         justifyContent: "flex-end",
         alignItems: "flex-end",
+        marginRight: 4,
+        marginBottom: 4,
+    },
+
+    msgIA:{
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        marginLeft: 4,
+        marginBottom: 4,
     },
 
     inputContainer:{
