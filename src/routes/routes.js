@@ -3,6 +3,7 @@ const ROUTES = {
     CHAT : "/chat",
     IMAGE: "/image",
     VOICE: "/voice",
+    CAMERA: "/camera",
 };
 
 export {ROUTES};

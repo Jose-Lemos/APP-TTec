@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View, Text } from 'react-native';
 
@@ -7,9 +8,12 @@ import  PantallaInicio  from "./src/screens/PantallaInicio";
 import  PantallaChat  from "./src/screens/PantallaChat";
 import { ROUTES } from './src/routes/routes';
 import PantallaImagen from './src/screens/PantallaImagen';
-import PantallaVoz from './src/screens/PantallaVoz';
+import PantallaCamara from './src/screens/PantallaCamara'
+
 
 const Tab = createBottomTabNavigator();
+
+const Stack = createStackNavigator();
 
 const CustomTabBarIcon = ({ focused, iconName, label }) => (
   <View
@@ -27,6 +31,18 @@ const CustomTabBarIcon = ({ focused, iconName, label }) => (
     {focused && <Text style={{ color: "white" }}>{label}</Text>}
   </View>
 );
+
+
+const ImageRoutes = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown:false,}}>
+      <Stack.Screen name='Image' component={PantallaImagen} />
+      <Stack.Screen name={ROUTES.CAMERA} component={PantallaCamara} />
+    </Stack.Navigator>
+  );
+}
+
+
 
 export default function App() {
 
@@ -65,7 +81,7 @@ export default function App() {
                       ),
                     }} 
                 />
-                <Tab.Screen name={ROUTES.IMAGE} component={PantallaImagen} 
+                <Tab.Screen name={ROUTES.IMAGE} component={ImageRoutes} 
                     options={{
                       tabBarIcon: ({ focused }) => (
                         <CustomTabBarIcon
@@ -75,13 +91,6 @@ export default function App() {
                         />
                       ),
                     }} 
-                />
-                <Tab.Screen name={ROUTES.VOICE} component={PantallaVoz} 
-                    options={{
-                      tabBarIcon: ({ focused }) => (
-                        <CustomTabBarIcon focused={focused} iconName="mic" label="VOZ" />
-                      ),
-                    }}
                 />
             </Tab.Navigator>
     </NavigationContainer>

@@ -1,19 +1,19 @@
 import {
     StyleSheet, 
     View, 
-    Text,
+    Text
 } from 'react-native';
 
 import HeaderBot from '../components/HeaderBot';
 
-const PantallaVoz = () => {
+const PantallaCamara = () => {
     return(
         <View style={styles.body}>
             <HeaderBot 
-                canal = "Voz"
+                canal = "Camara"
                 activityText = "Siempre Activo"   
             />
-            <Text>Voz</Text>
+            <Text>Camara</Text>
         </View>
     );
 }
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PantallaVoz;
+export default PantallaCamara;
