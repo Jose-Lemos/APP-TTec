@@ -16,6 +16,7 @@ import { useIsFocused } from "@react-navigation/native";
 import HeaderBot from '../components/HeaderBot';
 import MensajeUser from '../components/MensajeUser';
 import MensajeIA from '../components/MansajeIA';
+import { incrementTextResponsesCount } from '../services/analitycsStorage';
 
 const PantallaChat = (prop) => {
     const [texto, setTexto] = useState("");
@@ -31,6 +32,11 @@ const PantallaChat = (prop) => {
           setBuzon((messagesUpdated) =>
             messagesUpdated.concat({ message: data.mensaje, isUser: false })
           );
+          if (!data.error) {
+            incrementTextResponsesCount();
+          } else {
+            const mensajeFinal = `ERROR: ${mensajeFinal}`;
+          }
         } catch (error) {
           console.log("ERROR", error);
         }

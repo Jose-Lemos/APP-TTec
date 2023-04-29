@@ -1,30 +1,57 @@
 import { SafeAreaView, StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from "@react-navigation/native";
+import {useIsFocused, useNavigation } from "@react-navigation/native";
 import {ROUTES} from '../routes/routes';
+import { getTextResponsesCount } from '../services/analitycsStorage';
 
 
 import Cuadrado from '../components/Cuadrado';  // debe ser de la misma forma que el export
 import Rectangulo from '../components/Rectangulo';
+import { useEffect, useState } from 'react';
 
 
 
 const PantallaInicio =  () => {
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [analalyticsCount, setAnalalyticsCount] = useState([]);
 
   const _handlePress = () => {
     navigation.navigate(ROUTES.CHAT);
   };
 
+  
+  const getCountValues = async () => {
+    const textCount = await getTextResponsesCount();
+    setAnalalyticsCount([
+      {
+        key: "textCount",
+        icon: "chat",
+        num: textCount,
+        descriptionNum: "Rtas gen.",
+        color: "#0070F0",
+      },
+    ]);
+  };
+  
+  useEffect(() => {
+    if (isFocused) {
+      getCountValues();
+    }
+  }, [isFocused]);
+  
   return (
     <View style={styles.container}>
       <Text style={styles.home}>Inicio</Text>
       <Text style={styles.overview}>Resumen</Text>
 
       <View style = {styles.rectangulo1}>
-        <Cuadrado icon="chat" num="3.951" descriptionNum="Rtas gen" color="#0070F0"></Cuadrado>
+        {analalyticsCount.map((item) => (
+            <Cuadrado {...item} />
+          ))}
+        {/*
+        <Cuadrado icon="chat" num={textCount} descriptionNum="Rtas gen" color="#0070F0"></Cuadrado>
         <Cuadrado icon="image" num="1.000" descriptionNum="Img gen" color="#0070F0"></Cuadrado>
-        <Cuadrado icon="mic" num="15" descriptionNum="Trad. real" color="#0070F0"></Cuadrado>
+        <Cuadrado icon="mic" num="15" descriptionNum="Trad. real" color="#0070F0"></Cuadrado>/*}
         {/*<View style={styles.cuadrado1}>
           <Text><MaterialIcons name="alarm" size={28} color="#0070F0" /></Text>
           <Text style={styles.statisticsActivity}>3hs 14min</Text>
