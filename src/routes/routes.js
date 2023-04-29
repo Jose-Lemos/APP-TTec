@@ -4,6 +4,7 @@ const ROUTES = {
     IMAGE: "/image",
     VOICE: "/voice",
     CAMERA: "/camera",
+    PHOTO: "/photo",
 };
 
 export {ROUTES};

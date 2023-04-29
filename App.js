@@ -8,7 +8,8 @@ import  PantallaInicio  from "./src/screens/PantallaInicio";
 import  PantallaChat  from "./src/screens/PantallaChat";
 import { ROUTES } from './src/routes/routes';
 import PantallaImagen from './src/screens/PantallaImagen';
-import PantallaCamara from './src/screens/PantallaCamara'
+import PantallaCamara from './src/screens/PantallaCamara';
+import ImageComponent from './src/screens/IMAGE';
 
 
 const Tab = createBottomTabNavigator();
@@ -88,6 +89,17 @@ export default function App() {
                           focused={focused}
                           iconName="image"
                           label="IMAGEN"
+                        />
+                      ),
+                    }} 
+                />
+                <Tab.Screen name={ROUTES.PHOTO} component={ImageComponent} 
+                    options={{
+                      tabBarIcon: ({ focused }) => (
+                        <CustomTabBarIcon
+                          focused={focused}
+                          iconName="image"
+                          label="PHOTO"
                         />
                       ),
                     }} 
