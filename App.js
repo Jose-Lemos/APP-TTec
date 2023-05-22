@@ -93,17 +93,7 @@ export default function App() {
                       ),
                     }} 
                 />
-                <Tab.Screen name={ROUTES.PHOTO} component={ImageComponent} 
-                    options={{
-                      tabBarIcon: ({ focused }) => (
-                        <CustomTabBarIcon
-                          focused={focused}
-                          iconName="image"
-                          label="PHOTO"
-                        />
-                      ),
-                    }} 
-                />
+               
             </Tab.Navigator>
     </NavigationContainer>
   );
