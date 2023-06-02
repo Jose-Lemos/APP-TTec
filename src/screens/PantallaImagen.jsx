@@ -117,7 +117,7 @@ const PantallaImagen = () => {
     const navigation = useNavigation();
 
     const _handlePress = () => {
-        navigation.navigate(ROUTES.CAMERA);
+        navigation.navigate(ROUTES.CAMERA, {_addUserMessage} );
     };
 
     return(
