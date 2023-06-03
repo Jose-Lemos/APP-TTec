@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import {ROUTES} from '../routes/routes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Pressable } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useIsFocused } from "@react-navigation/native";
 
 import HeaderBot from '../components/HeaderBot';
@@ -22,6 +22,7 @@ const PantallaChat = (prop) => {
     const [texto, setTexto] = useState("");
     const [buzon, setBuzon] = useState([]);
     const isFocused = useIsFocused();
+    const scrollViewRef = useRef(null);
 
     const fetchApi = async (message) => {
         try {
@@ -67,7 +68,11 @@ const PantallaChat = (prop) => {
                 activityText = "Siempre Activo"   
             />
             <KeyboardAvoidingView style={{ flex: 1 }}>
-                <ScrollView style={styles.chatContent}>
+                <ScrollView style={styles.chatContent} ref={scrollViewRef} 
+                  onContentSizeChange={() =>
+                    scrollViewRef.current.scrollToEnd({ animated: true })
+                  } 
+                >
                     {buzon.map((texto, index)=> texto.isUser? (
                             <View
                              key={`msg-${index}`}

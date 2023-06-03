@@ -7,7 +7,7 @@ import {
     Image,
 } from 'react-native';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +28,7 @@ const PantallaImagen = () => {
     const [images, setImages] = useState([]);
     const isFocused = useIsFocused();
     const BASE_URL = "https://tnt2023.panaltesting.com.ar";
+    const scrollViewRef = useRef(null);
 
     const pickImageAsync = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -117,7 +118,7 @@ const PantallaImagen = () => {
     const navigation = useNavigation();
 
     const _handlePress = () => {
-        navigation.navigate(ROUTES.CAMERA, {_addUserMessage} );
+        navigation.navigate(ROUTES.CAMERA, {_addUserMessage} ); //se pasa un objeto {} como parámetro para ser utilizado en otra vista
     };
 
     return(
@@ -128,7 +129,11 @@ const PantallaImagen = () => {
             />
 
             <KeyboardAvoidingView style={{ flex: 1 }}>
-                <ScrollView style={styles.chatContent}>
+                <ScrollView style={styles.chatContent} ref={scrollViewRef} 
+                  onContentSizeChange={() =>
+                    scrollViewRef.current.scrollToEnd({ animated: true })
+                  } 
+                >
                     {images.map((texto, index)=> texto.isUser? (  //map espera la definición de una función
                             <View
                              key={`msg-${index}`}

@@ -16,12 +16,13 @@ const PantallaCamara = () => {
     const camera = useRef(null);
     const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
+    
 
     const takePicture = async () => {
         if (camera.current) {
           const data = await camera.current.takePictureAsync();
           const resized = await manipulateAsync(data.uri, [
-            { resize: { height: 300 } },
+            { resize: { height: 400 } },
           ]);
           setImage(resized.uri);
           params?._addUserMessage(resized.uri);

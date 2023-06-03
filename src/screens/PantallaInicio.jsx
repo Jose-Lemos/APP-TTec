@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, ScrollView, Pressable} from 'reac
 import {useIsFocused, useNavigation } from "@react-navigation/native";
 import {ROUTES} from '../routes/routes';
 import { getTextResponsesCount } from '../services/analitycsStorage';
-
+import { getImageResponsesCount } from '../services/analitycsStorage';
 
 import Cuadrado from '../components/Cuadrado';  // debe ser de la misma forma que el export
 import Rectangulo from '../components/Rectangulo';
@@ -15,19 +15,31 @@ const PantallaInicio =  () => {
   const navigation = useNavigation();
   const [analalyticsCount, setAnalalyticsCount] = useState([]);
 
-  const _handlePress = () => {
+  const _handlePressChat = () => {
     navigation.navigate(ROUTES.CHAT);
+  };
+
+  const _handlePressImage = () => {
+    navigation.navigate(ROUTES.IMAGE);
   };
 
   
   const getCountValues = async () => {
     const textCount = await getTextResponsesCount();
+    const imageCount = await getImageResponsesCount();
     setAnalalyticsCount([
       {
         key: "textCount",
         icon: "chat",
         num: textCount,
         descriptionNum: "Rtas gen.",
+        color: "#0070F0",
+      },
+      {
+        key: "imageCount",
+        icon: "image",
+        num: imageCount,
+        descriptionNum: "Img. gen.",
         color: "#0070F0",
       },
     ]);
@@ -66,9 +78,15 @@ const PantallaInicio =  () => {
 
 
       <ScrollView style = {styles.containerRectangulos}>
-        <Rectangulo bckgColor="#FFF9F0" titleText="Canal de Texto" descText="Chatea con la IA" txtColor="#A05E03" btnText="CHATEÁ"></Rectangulo>
-        <Rectangulo bckgColor="#F0F0FF" titleText="Canal de Imagen" descText="Imágenes desde Imágenes" txtColor="#5555CB" btnText="CREÁ"></Rectangulo>
-        <Rectangulo bckgColor="#FFF0FD" titleText="Canal de Voz" descText="Convertí tu voz a texto" txtColor="#5555CB" btnText="HABLÁ"></Rectangulo>
+        <Pressable onPress={_handlePressChat}>
+          <Rectangulo bckgColor="#FFF9F0" titleText="Canal de Texto" descText="Chatea con la IA" txtColor="#A05E03" btnText="CHATEÁ" ></Rectangulo>
+        </Pressable>
+        
+        <Pressable onPress={_handlePressImage}>
+          <Rectangulo bckgColor="#F0F0FF" titleText="Canal de Imagen" descText="Imágenes desde Imágenes" txtColor="#5555CB" btnText="CREÁ" ></Rectangulo>
+        </Pressable>
+        
+        <Rectangulo bckgColor="#FFF0FD" titleText="Canal de Voz" descText="Convertí tu voz a texto" txtColor="#5555CB" btnText="HABLÁ" ></Rectangulo>
 
         {/*<View style = {[styles.rectanguloLargo , {backgroundColor: "#FFF9F0"},]}>
           <View style={styles.descriptionContainerActivities}>
@@ -138,7 +156,7 @@ const styles = StyleSheet.create({
 
   rectangulo1:{
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
 
   containerRectangulos:{
