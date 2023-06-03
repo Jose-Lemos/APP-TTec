@@ -39,8 +39,6 @@ const PantallaImagen = () => {
         if (!result.canceled) {
         setSelectedImage(""+result.assets[0].uri);
         _addUserMessage(""+result.assets[0].uri);
-        console.log(selectedImage);
-        console.log(images);
         } else {
         alert("You did not select any image.");
         }
