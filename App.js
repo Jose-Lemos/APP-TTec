@@ -10,11 +10,19 @@ import { ROUTES } from './src/routes/routes';
 import PantallaImagen from './src/screens/PantallaImagen';
 import PantallaCamara from './src/screens/PantallaCamara';
 import ImageComponent from './src/screens/IMAGE';
+import ScreenGroup from './src/screens/ScreenGroup';
+import ScreenLogin from './src/screens/ScreenLogin';
+import ScreenSingIn from './src/screens/ScreenSingIn';
+
+
+
 
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
+
+
 
 const CustomTabBarIcon = ({ focused, iconName, label }) => (
   <View
@@ -43,10 +51,22 @@ const ImageRoutes = () => {
   );
 }
 
+const ScreenLoginRoutes = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown:false,}}>
+      <Stack.Screen name={ROUTES.LOGIN} component={ScreenLogin} />
+      <Stack.Screen name={ROUTES.SIGNIN} component={ScreenSingIn} />
+      <Stack.Screen name={ROUTES.GROUP} component={ScreenGroup} />
+    </Stack.Navigator>
+  );
+}
+
+
+
 
 
 export default function App() {
-
+  
 
   return (
     <NavigationContainer>
@@ -89,6 +109,18 @@ export default function App() {
                           focused={focused}
                           iconName="image"
                           label="IMAGEN"
+                        />
+                      ),
+                    }} 
+                />
+
+                <Tab.Screen name={"SALA"} component={ScreenLoginRoutes} 
+                    options={{
+                      tabBarIcon: ({ focused }) => (
+                        <CustomTabBarIcon
+                          focused={focused}
+                          iconName="groups"
+                          label="GROUP"
                         />
                       ),
                     }} 

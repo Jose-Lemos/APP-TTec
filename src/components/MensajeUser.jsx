@@ -1,10 +1,12 @@
 import { View, StyleSheet, Text } from "react-native";
 
 
-const MensajeUser = ({text} ) =>{
+const MensajeUser = ({text, fecha} ) =>{
     return(
         <View style={styles.msgText}>
+            <Text style={{color:"#ffffff", padding:2, fontSize: 12, fontWeight: "bold", marginRight: 8}}>YOU:</Text>
             <Text style={styles.text}> {text} </Text>
+            <Text style={styles.fecha}> {fecha} hs </Text>
         </View>
     );
 };
@@ -27,6 +29,11 @@ const styles = StyleSheet.create({
         padding: 6,
     },
 
+    fecha: {
+        color:"#FFFFFF",
+        fontSize: 10,
+        justifyContent: "flex-end",
+    }
 });
 
 export default MensajeUser;

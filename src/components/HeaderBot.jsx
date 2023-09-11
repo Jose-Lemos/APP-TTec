@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         gap: 30,
         alignItems: "center",
         justifyContent: "center",
-        margin: 20,
+        margin: 30,
     }, 
 
     containRobot:{

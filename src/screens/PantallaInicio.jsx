@@ -23,6 +23,15 @@ const PantallaInicio =  () => {
     navigation.navigate(ROUTES.IMAGE);
   };
 
+  const _handlePressSala = () => {
+    try{
+      navigation.navigate(ROUTES.GROUP);
+    }catch (error){
+      navigation.navigate(ROUTES.LOGIN);
+    }
+    
+  };
+
   
   const getCountValues = async () => {
     const textCount = await getTextResponsesCount();
@@ -85,9 +94,10 @@ const PantallaInicio =  () => {
         <Pressable onPress={_handlePressImage}>
           <Rectangulo bckgColor="#F0F0FF" titleText="Canal de Imagen" descText="Imágenes desde Imágenes" txtColor="#5555CB" btnText="CREÁ" ></Rectangulo>
         </Pressable>
+        <Pressable onPress={_handlePressSala}>
+          <Rectangulo bckgColor="#FFF0FD" titleText="Canal de Sala Común" descText="Sala común de chat" txtColor="#5555CB" btnText="COMPARTE" ></Rectangulo>
+        </Pressable>
         
-        <Rectangulo bckgColor="#FFF0FD" titleText="Canal de Voz" descText="Convertí tu voz a texto" txtColor="#5555CB" btnText="HABLÁ" ></Rectangulo>
-
         {/*<View style = {[styles.rectanguloLargo , {backgroundColor: "#FFF9F0"},]}>
           <View style={styles.descriptionContainerActivities}>
             <Text style={styles.activityText}>Canal de Texto</Text>
